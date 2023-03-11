@@ -1,0 +1,59 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier", "react"],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "ignorePatterns": ["/node_modules/**', '/build/**"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-use-before-define": ["error", { "variables": false }],
+    "react/prop-types": "off",
+    "react/no-array-index-key": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-unused-vars": ["warn"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-shadow": ["warn"],
+    "global-require": "off",
+    "no-alert": "off",
+    "consistent-return": "off",
+    "object-shorthand": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "array-callback-return": "off",
+    "no-plusplus": "off",
+    "no-nested-ternary": "off",
+    "prefer-template": "off",
+    "jsx-indent-props": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-expressions": "off",
+    "react/jsx-curly-newline": "off",
+    "no-param-reassign": "off",
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/button-has-type": "off",
+    "prefer-destructuring": "off",
+    "no-console": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "no-restricted-globals": "off",
+    "no-throw-literal": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/heading-has-content": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-wrap-multilines": "off"
+  },
+  "settings": {}
+}
