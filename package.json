@@ -4,6 +4,9 @@
   "private": true,
   "description": "gallery",
   "author": "MBK",
+  "engines": {
+    "node": ">=18"
+  },
   "keywords": [
     "gatsby"
   ],
