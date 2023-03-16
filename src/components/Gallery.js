@@ -8,25 +8,42 @@ const Container = styled.div`
   width: 100%;
   background: #fff;
   box-sizing: border-box;
-  padding: 1em 1em 3.75em 1em;
+  padding: 1em 10px 3.75em 10px;
   background-color: #fef5e6;
 
   .infinite-scroll-component {
-    display: grid;
     margin: auto;
-    grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-    grid-gap: 1em;
-    overflow: unset !important;
+    width: auto;
+    float: left;
+    clear: both;
+    display: block;
+    //display: grid;
+    //grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+    //grid-gap: 1em;
+    //overflow: unset !important;
   }
   .insta-img {
-    height: 290px;
-    width: 100%;
+    //height: 290px;
+    //width: 100%;
+    object-fit: cover;
+    width: 360px;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    aspect-ratio: auto 360 / 300;
+    height: 300px;
   }
   .insta {
-    width: 100%;
-    height: 290px;
+    //width: 100%;
+    //height: 290px;
     box-sizing: border-box;
     box-shadow: 1px 1px 10px #444;
+    float: left;
+    display: block;
+    height: 300px;
+    width: 360px;
+    text-align: center;
+    min-width: 200px;
+    margin: 9px;
   }
   span {
     font-size: 16px;
@@ -50,14 +67,29 @@ const Page = ({ subreddit }) => {
   }, []);
   const fetchImages = async () => {
     const url = `https://api.reddit.com/r/${subreddit}/new.json?limit=15&after=${after}`;
-    fetch(url)
+    await fetch(url)
       .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-
-        const imageUrls = result.data.children
+      .then(async (result) => {
+        let imageUrls = result.data.children
           .filter((child) => child.data.post_hint === "image")
           .map((child) => child.data.url);
+
+        if (imageUrls.length < 15) {
+          await fetch(
+            `https://api.reddit.com/r/${subreddit}/new.json?limit=15&after=${result.data.after}`
+          )
+            .then((resp) => resp.json())
+            .then((res) => {
+              const arr = res.data.children
+                .filter((child) => child.data.post_hint === "image")
+                .map((child) => child.data.url);
+              imageUrls = imageUrls.concat(arr);
+            });
+        }
+
+        if (imageUrls.length > 15) {
+          imageUrls = imageUrls.slice(0, 15);
+        }
 
         const arr = images.concat(imageUrls);
         setAfter(result.data.after);
